@@ -1,0 +1,148 @@
+mutation CreateDemoData @transaction @auth(level: USER, insecureReason: "Seed data is for development purposes and can be created by any logged in user.") {
+  user_insertMany(data: [
+    {
+      id: "b216973e-324e-4f1e-9a2d-1f6e2b4d5c6a",
+      displayName: "PlayerOne",
+      email: "player.one@example.com",
+      createdAt: "2023-01-01T10:00:00Z",
+      bio: "An avid gamer.",
+      photoUrl: "https://example.com/playerone.jpg"
+    },
+    {
+      id: "a1c8d6e7-5b9f-4d0c-8e1a-2c3b4a5f6e7d",
+      displayName: "GamerGirl",
+      email: "gamer.girl@example.com",
+      createdAt: "2023-01-05T11:30:00Z",
+      bio: "Loves RPGs and strategy games.",
+      photoUrl: "https://example.com/gamergirl.jpg"
+    }
+  ])
+  game_insertMany(data: [
+    {
+      id: "c1f7e0d9-8a2b-4e3c-7f4d-5e6a7b8c9d0e",
+      title: "Epic Fantasy Quest",
+      releaseYear: 2022,
+      developer: "FantasyDevs",
+      publisher: "GamePublishCo",
+      platform: "PC",
+      genres: ["RPG", "Fantasy"],
+      summary: "An epic adventure through magical lands.",
+      coverImageUrl: "https://example.com/epic_fantasy_quest.jpg",
+      createdAt: "2022-05-10T14:00:00Z"
+    },
+    {
+      id: "e5d2b1f8-0c3a-4f9e-6a7b-8c9d0e1f2a3b",
+      title: "Galactic Conquerors",
+      releaseYear: 2021,
+      developer: "SpaceStudios",
+      publisher: "InterstellarGames",
+      platform: "PC",
+      genres: ["Strategy", "Sci-Fi"],
+      summary: "Dominate the galaxy in this real-time strategy game.",
+      coverImageUrl: "https://example.com/galactic_conquerors.jpg",
+      createdAt: "2021-08-15T09:00:00Z"
+    }
+  ])
+  collectionEntry_insertMany(data: [
+    {
+      id: "f8b7c6a5-4d3e-2f1a-0b9c-8d7e6f5a4b3c",
+      userId: "b216973e-324e-4f1e-9a2d-1f6e2b4d5c6a",
+      gameId: "c1f7e0d9-8a2b-4e3c-7f4d-5e6a7b8c9d0e",
+      status: "Playing",
+      platform: "PC",
+      purchaseDate: "2023-01-15",
+      notes: "Really enjoying this one!",
+      createdAt: "2023-01-15T12:00:00Z"
+    },
+    {
+      id: "1c2b3a4d-5e6f-7h8i-9j0k-1l2m3n4o5p6q",
+      userId: "a1c8d6e7-5b9f-4d0c-8e1a-2c3b4a5f6e7d",
+      gameId: "e5d2b1f8-0c3a-4f9e-6a7b-8c9d0e1f2a3b",
+      status: "Completed",
+      platform: "PC",
+      purchaseDate: "2022-03-20",
+      notes: "A fantastic strategy game, highly recommend.",
+      createdAt: "2022-03-20T10:00:00Z"
+    }
+  ])
+  playSession_insertMany(data: [
+    {
+      id: "a9b8c7d6-e5f4-3h2i-1j0k-9l8m7n6o5p4q",
+      userId: "b216973e-324e-4f1e-9a2d-1f6e2b4d5c6a",
+      collectionEntryId: "f8b7c6a5-4d3e-2f1a-0b9c-8d7e6f5a4b3c",
+      playedAt: "2023-01-20T18:00:00Z",
+      durationMinutes: 120,
+      notes: "Made good progress on the main quest."
+    },
+    {
+      id: "z1y2x3w4-v5u6-t7s8-r9q0-p1o2n3m4l5k6",
+      userId: "a1c8d6e7-5b9f-4d0c-8e1a-2c3b4a5f6e7d",
+      collectionEntryId: "1c2b3a4d-5e6f-7h8i-9j0k-1l2m3n4o5p6q",
+      playedAt: "2022-04-01T20:30:00Z",
+      durationMinutes: 90,
+      notes: "Final battle was intense!"
+    }
+  ])
+  review_insertMany(data: [
+    {
+      id: "d4c3b2a1-e0f9-8h7g-6f5e-4d3c2b1a0e9f",
+      userId: "b216973e-324e-4f1e-9a2d-1f6e2b4d5c6a",
+      gameId: "c1f7e0d9-8a2b-4e3c-7f4d-5e6a7b8c9d0e",
+      collectionEntryId: "f8b7c6a5-4d3e-2f1a-0b9c-8d7e6f5a4b3c",
+      rating: 9,
+      isPublic: true,
+      reviewText: "A truly captivating RPG with a rich story and engaging combat.",
+      createdAt: "2023-02-01T10:00:00Z",
+      updatedAt: "2023-02-01T10:00:00Z",
+      associatedPlaySessionId: "a9b8c7d6-e5f4-3h2i-1j0k-9l8m7n6o5p4q"
+    },
+    {
+      id: "g6f5e4d3-c2b1-a0e9-f8h7-g6f5e4d3c2b1",
+      userId: "a1c8d6e7-5b9f-4d0c-8e1a-2c3b4a5f6e7d",
+      gameId: "e5d2b1f8-0c3a-4f9e-6a7b-8c9d0e1f2a3b",
+      collectionEntryId: "1c2b3a4d-5e6f-7h8i-9j0k-1l2m3n4o5p6q",
+      rating: 10,
+      isPublic: true,
+      reviewText: "Best strategy game of the decade! The unit variety and tactical depth are incredible.",
+      createdAt: "2022-04-10T14:00:00Z",
+      updatedAt: "2022-04-10T14:00:00Z",
+      associatedPlaySessionId: "z1y2x3w4-v5u6-t7s8-r9q0-p1o2n3m4l5k6"
+    }
+  ])
+  gameList_insertMany(data: [
+    {
+      id: "0d9c8b7a-6e5d-4c3b-2a1f-0e9d8c7b6a5e",
+      userId: "b216973e-324e-4f1e-9a2d-1f6e2b4d5c6a",
+      name: "My Top RPGs",
+      description: "A list of my favorite role-playing games.",
+      isPublic: true,
+      createdAt: "2023-03-01T09:00:00Z",
+      updatedAt: "2023-03-01T09:00:00Z"
+    },
+    {
+      id: "f1e2d3c4-b5a6-9d8c-7b6a-5e4f3d2c1b0a",
+      userId: "a1c8d6e7-5b9f-4d0c-8e1a-2c3b4a5f6e7d",
+      name: "Strategy Masterpieces",
+      description: "Games that require serious strategic thinking.",
+      isPublic: true,
+      createdAt: "2023-03-05T10:00:00Z",
+      updatedAt: "2023-03-05T10:00:00Z"
+    }
+  ])
+  gameListEntry_insertMany(data: [
+    {
+      id: "5f4e3d2c-1b0a-9e8d-7c6b-5a4f3e2d1c0b",
+      gameListId: "0d9c8b7a-6e5d-4c3b-2a1f-0e9d8c7b6a5e",
+      gameId: "c1f7e0d9-8a2b-4e3c-7f4d-5e6a7b8c9d0e",
+      position: 1,
+      notes: "The first entry in my top RPG list."
+    },
+    {
+      id: "9e8d7c6b-5a4f-3e2d-1c0b-9a8b7c6d5e4f",
+      gameListId: "f1e2d3c4-b5a6-9d8c-7b6a-5e4f3d2c1b0a",
+      gameId: "e5d2b1f8-0c3a-4f9e-6a7b-8c9d0e1f2a3b",
+      position: 1,
+      notes: "Essential for any strategy fan."
+    }
+  ])
+}

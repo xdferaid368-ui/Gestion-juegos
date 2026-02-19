@@ -1,33 +1,20 @@
+// Importar funciones necesarias de Firebase
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
-import { db } from "./firebase";
-import { Juego } from "./types";
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-
+// Configuración de tu Firebase (ya real)
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_AUTH_DOMAIN",
-  projectId: "TU_PROJECT_ID",
-  storageBucket: "TU_STORAGE_BUCKET",
-  messagingSenderId: "TU_MESSAGING_SENDER_ID",
-  appId: "TU_APP_ID"
+  apiKey: "AIzaSyAEnbybGK6MEKbOBNsKalLIM4cgW5gi92o",
+  authDomain: "gestion-juegos.firebaseapp.com",
+  projectId: "gestion-juegos",
+  storageBucket: "gestion-juegos.firebasestorage.app",
+  messagingSenderId: "74726648690",
+  appId: "1:74726648690:web:0b4f2c9c91117e22714beb",
+  measurementId: "G-CH3ZQLR4TG"
 };
 
+// Inicializar Firebase
+const app = initializeApp(firebaseConfig);
 
-const juegosRef = collection(db, "juegos");
-
-export const getJuegos = async (): Promise<Juego[]> => {
-  const snapshot = await getDocs(juegosRef);
-  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Juego));
-};
-
-export const addJuego = async (juego: Juego) => {
-  await addDoc(juegosRef, juego);
-};
-
-export const deleteJuego = async (id: string) => {
-  await deleteDoc(doc(db, "juegos", id));
-};
+// Exportar Firestore para usarlo en CRUD
+export const db = getFirestore(app);

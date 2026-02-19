@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Juego } from "./types";
 import { JuegoForm } from "./components/JuegoForm";
 import { JuegoList } from "./components/JuegoList";
-import { getJuegos, addJuego, deleteJuego } from "./firebase";
+import { getJuegos, addJuego, deleteJuego } from "./firebaseService";
 
 function App() {
   const [juegos, setJuegos] = useState<Juego[]>([]);

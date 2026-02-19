@@ -1,0 +1,47 @@
+query GetUserGameLists @auth(level: USER, insecureReason: "This operation retrieves a user's public and private game lists, which is safe to expose to all logged-in users.") {
+  gameLists(where: {userId: {eq_expr: "auth.uid"}}) {
+    id
+    name
+    description
+    isPublic
+    updatedAt
+  }
+}
+
+mutation CreateGameList($name: String!, $description: String, $isPublic: Boolean!) @auth(level: USER) {
+  gameList_insert(data: {
+    name: $name,
+    description: $description,
+    isPublic: $isPublic,
+    userId_expr: "auth.uid",
+    createdAt_expr: "request.time",
+    updatedAt_expr: "request.time"
+  }) {
+    id
+  }
+}
+
+query GetGameDetails($gameId: UUID!) @auth(level: PUBLIC, insecureReason: "This operation retrieves details for a specific game, which is safe to expose to the public.") {
+  game(id: $gameId) {
+    id
+    title
+    developer
+    publisher
+    releaseYear
+    genres
+    platform
+    coverImageUrl
+    summary
+  }
+}
+
+mutation AddGameToList($gameListId: UUID!, $gameId: UUID!, $notes: String, $position: Int!) @auth(level: USER) {
+  gameListEntry_insert(data: {
+    gameListId: $gameListId,
+    gameId: $gameId,
+    notes: $notes,
+    position: $position
+  }) {
+    id
+  }
+}
