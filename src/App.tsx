@@ -3,6 +3,8 @@ import { Juego } from "./types";
 import { JuegoForm } from "./components/JuegoForm";
 import { JuegoList } from "./components/JuegoList";
 import { getJuegos, addJuego, deleteJuego } from "./firebaseService";
+import "./App.css";
+
 
 function App() {
   const [juegos, setJuegos] = useState<Juego[]>([]);
@@ -38,17 +40,28 @@ function App() {
 
       {/* Formulario */}
       <div className="form-container">
+        <h2>Introduce un nuevo juego</h2>
+        <p>Rellena los campos a continuación y pulsa "Añadir juego".</p>
         <JuegoForm onAdd={handleAdd} />
       </div>
 
       {/* Lista de juegos */}
-      {loading ? (
-        <p style={{ textAlign: "center", marginTop: "2rem" }}>Cargando...</p>
-      ) : (
-        <div className="card-container">
-          <JuegoList juegos={juegos} onDelete={handleDelete} />
-        </div>
-      )}
+      <div className="card-container">
+        {loading ? (
+          <p style={{ textAlign: "center", marginTop: "2rem" }}>Cargando...</p>
+        ) : juegos.length === 0 ? (
+          <p style={{ textAlign: "center", marginTop: "2rem" }}>
+            No hay juegos añadidos. Introduce alguno arriba.
+          </p>
+        ) : (
+          <>
+            <h2 style={{ width: "100%", textAlign: "center", marginBottom: "1rem" }}>
+              Juegos añadidos
+            </h2>
+            <JuegoList juegos={juegos} onDelete={handleDelete} />
+          </>
+        )}
+      </div>
     </div>
   );
 }
