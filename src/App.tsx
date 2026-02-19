@@ -30,10 +30,25 @@ function App() {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Gestión de Juegos de Mesa</h1>
-      <JuegoForm onAdd={handleAdd} />
-      {loading ? <p>Cargando...</p> : <JuegoList juegos={juegos} onDelete={handleDelete} />}
+    <div>
+      {/* Navbar */}
+      <div className="navbar">
+        <h1>Gestión de Juegos de Mesa</h1>
+      </div>
+
+      {/* Formulario */}
+      <div className="form-container">
+        <JuegoForm onAdd={handleAdd} />
+      </div>
+
+      {/* Lista de juegos */}
+      {loading ? (
+        <p style={{ textAlign: "center", marginTop: "2rem" }}>Cargando...</p>
+      ) : (
+        <div className="card-container">
+          <JuegoList juegos={juegos} onDelete={handleDelete} />
+        </div>
+      )}
     </div>
   );
 }
